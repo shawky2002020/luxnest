@@ -1,0 +1,43 @@
+<div class="property-card" [ngClass]="{'featured': featured}">
+  <div class="property-image">
+    <img [src]="property.images[0] || 'assets/images/placeholder.jpg'" [alt]="property.title" loading="lazy">
+    <div class="property-type">{{ property.type | titlecase }}</div>
+  </div>
+  
+  <div class="property-content">
+    <div class="property-header">
+      <h3 class="property-title">
+        <a [routerLink]="['/properties', property.id]">{{ property.title }}</a>
+      </h3>
+      <div class="property-location">{{ property.location.city }}, {{ property.location.state }}</div>
+    </div>
+    
+    <div class="property-details">
+      <div class="property-detail">
+        <i class="fas fa-bed"></i>
+        <span>{{ property.bedrooms }} {{ property.bedrooms === 1 ? 'Bedroom' : 'Bedrooms' }}</span>
+      </div>
+      <div class="property-detail">
+        <i class="fas fa-bath"></i>
+        <span>{{ property.bathrooms }} {{ property.bathrooms === 1 ? 'Bathroom' : 'Bathrooms' }}</span>
+      </div>
+      <div class="property-detail">
+        <i class="fas fa-user"></i>
+        <span>{{ property.maxGuests }} {{ property.maxGuests === 1 ? 'Guest' : 'Guests' }}</span>
+      </div>
+    </div>
+    
+    <div class="property-footer">
+      <div class="property-price">
+        <span class="amount">{{ property.price | currency }}</span>
+        <span class="period">/ {{ property.priceUnit }}</span>
+      </div>
+      
+      <div class="property-rating" *ngIf="property.rating">
+        <i class="fas fa-star"></i>
+        <span>{{ property.rating }}</span>
+        <span class="review-count" *ngIf="property.reviewCount">({{ property.reviewCount }})</span>
+      </div>
+    </div>
+  </div>
+</div>

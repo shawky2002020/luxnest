@@ -1,0 +1,60 @@
+<div class="search-bar" [ngClass]="{'expanded': isExpanded}">
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="search-form">
+    <div class="search-field location-field">
+      <label for="location">
+        <i class="fas fa-map-marker-alt"></i>
+        Location
+      </label>
+      <input 
+        type="text" 
+        id="location" 
+        formControlName="location" 
+        placeholder="Where are you going?"
+        (focus)="toggleExpand()"
+      >
+    </div>
+    
+    <div class="search-field date-field" *ngIf="isExpanded">
+      <label for="checkIn">
+        <i class="fas fa-calendar"></i>
+        Check In
+      </label>
+      <input 
+        type="date" 
+        id="checkIn" 
+        formControlName="checkIn"
+      >
+    </div>
+    
+    <div class="search-field date-field" *ngIf="isExpanded">
+      <label for="checkOut">
+        <i class="fas fa-calendar"></i>
+        Check Out
+      </label>
+      <input 
+        type="date" 
+        id="checkOut" 
+        formControlName="checkOut"
+      >
+    </div>
+    
+    <div class="search-field guests-field" *ngIf="isExpanded">
+      <label for="guests">
+        <i class="fas fa-user"></i>
+        Guests
+      </label>
+      <input 
+        type="number" 
+        id="guests" 
+        formControlName="guests"
+        min="1" 
+        max="20"
+      >
+    </div>
+    
+    <button type="submit" class="search-button">
+      <i class="fas fa-search"></i>
+      <span *ngIf="isExpanded">Search</span>
+    </button>
+  </form>
+</div>

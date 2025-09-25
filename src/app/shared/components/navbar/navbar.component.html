@@ -1,0 +1,42 @@
+<nav class="navbar">
+  <div class="container">
+      <a routerLink="/" class="logo">
+        <img src="logo.png" alt="">
+      </a>
+    
+    <button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    
+    <div class="navbar-menu" [ngClass]="{'is-active': isMenuOpen}">
+      <div class="navbar-start">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-item">Home</a>
+        <a routerLink="/properties" routerLinkActive="active" class="navbar-item">Properties</a>
+        <a routerLink="/about" routerLinkActive="active" class="navbar-item">About Us</a>
+        <a routerLink="/contact" routerLinkActive="active" class="navbar-item">Contact</a>
+        <a routerLink="/partner" routerLinkActive="active" class="navbar-item">Partner With Us</a>
+      </div>
+      
+      <div class="navbar-end">
+        <ng-container *ngIf="(authService.currentUser$ | async) === null; else loggedIn">
+          <a routerLink="/auth/login" routerLinkActive="active" class="navbar-item">Login</a>
+          <a routerLink="/auth/register" routerLinkActive="active" class="navbar-item button is-primary">Sign Up</a>
+        </ng-container>
+        
+        <ng-template #loggedIn>
+          <div class="navbar-item has-dropdown" [ngClass]="{'is-active': isMenuOpen}">
+            <a class="navbar-link">My Account</a>
+            <div class="navbar-dropdown">
+              <a routerLink="/account/profile" class="navbar-item">Profile</a>
+              <a routerLink="/account/bookings" class="navbar-item">My Bookings</a>
+              <hr class="navbar-divider">
+              <a (click)="logout()" class="navbar-item">Logout</a>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</nav>
